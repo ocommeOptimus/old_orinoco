@@ -1,0 +1,21 @@
+{
+  "name": "projet-5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "sass": "sass --watch ./scss/main.scss:./css/style.css",
+    "prefix": "postcss ./css/style.css --use autoprefixer -d ./css/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ocommeOptimus/orinoco.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ocommeOptimus/orinoco/issues"
+  },
+  "homepage": "https://github.com/ocommeOptimus/orinoco#readme"
+}
