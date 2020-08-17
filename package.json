@@ -4,7 +4,7 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "sass": "sass --watch ./assets/scss/main.scss:./assets/css/style.css",
+    "sass": "sass --watch ./src/assets/scss/main.scss:./src/assets/css/style.css",
     "prefix": "postcss ./assets/css/style.css --use autoprefixer -d ./assets/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
