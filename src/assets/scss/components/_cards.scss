@@ -1,4 +1,4 @@
-.cards {
+.cards, .card {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -26,6 +26,7 @@
   opacity: 0.75;
   font-size: 0.8rem;
   line-height: 1.4;
+  text-align: center;
 }
 
 .card img {
@@ -54,11 +55,12 @@
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  border-radius: 3px;
 }
 
 .card-back {
   background-color: #222;
   color: #fff;
-  padding: 1.5rem;
+  padding: .25rem;
   transform: rotateY(180deg);
 }
