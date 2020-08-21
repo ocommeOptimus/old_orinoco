@@ -1,0 +1,25 @@
+.header {
+    background: $colour-bg-nav;
+    height: 245px;
+    border-bottom: 2px solid lighten($colour-bg-nav, 15);
+    padding: 0 25px;
+    @include flex-space;
+    @media (max-width:992px) {
+        height: 220px;
+    }
+    @media (max-width:576px) {
+        height: 195px;
+    }
+    &__link {
+        margin: auto;
+    }   
+    &__logo {
+        width: auto;
+        @media (max-width:922px) {
+            height: 65px;
+        }
+    }
+    &__cart-img {
+        height: 75px;
+    }
+}
