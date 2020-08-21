@@ -1,0 +1,15 @@
+.nav__link {
+    display: inline;
+    font-size: map-get($font-size, small);
+    & a{
+    text-decoration: none;
+    color: $colour-txt;
+    }
+    &--active {
+        color: $colour-secondary;
+        &:hover{
+            cursor:default;
+            color: $colour-secondary;
+        }
+    }
+}

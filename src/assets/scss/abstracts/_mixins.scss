@@ -1,0 +1,177 @@
+@mixin flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@mixin flex-space {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+@mixin font-face($map){
+    @each $mod, $val in $map {
+      @font-face {
+        font-family: $mod;
+        src: url('../../fonts/#{$val}') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        }
+    }
+}
+@mixin box-shadow($map){
+    @each $card-number, $val in $map {
+        &--shadow-#{$card-number} {
+            box-shadow: 1px 1px 22px lighten(map-get($val, txt), 35);
+        }
+    }
+}
+
+@mixin box-anim-hover($map){
+    @each $card-number, $val in $map {
+        @keyframes menu-hover-#{$card-number} {
+            0%{
+                opacity: 0.9;
+            }
+            100%{
+                opacity: 0.8;
+                box-shadow: 1px 1px 28px darken(map-get($val, txt), 3);
+            }
+        }
+    }
+}
+
+@mixin card-preview($map) {
+    @each $card-number, $val in $map{
+      &--style-#{$card-number}{
+      font-family: map-get($val, byline);
+      font-size: map-get($val, byline-size);
+      color: map-get($val, txt);
+      background-color: map-get($val, bg);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      @media (max-width:576px){
+          font-size: map-get($val, byline-size)*0.63;
+      }
+      .menu__title {
+        font-family: map-get($val, font-title);
+        font-size: map-get($val, title-size);
+        font-weight: lighter;
+        width: 100%;
+        text-align: center;
+        @media (max-width:1200px) {
+            font-size: map-get($val, title-size)*0.85;
+        }
+        @media (max-width:1070px) {
+            font-size: map-get($val, title-size)*0.7;
+        }
+        @media (max-width:992px) {
+            font-size: map-get($val, title-size)*0.9;
+        }
+        @media (max-width:576px) {
+            font-size: map-get($val, title-size)*0.63;
+        }
+        }
+      }
+    }
+}
+
+@mixin card-details($map) {
+    @each $card-number, $val in $map{
+      &--style-#{$card-number}{
+      font-family: map-get($val, byline);
+      font-size: map-get($val, byline-size);
+      color: map-get($val, txt);
+      background-color: map-get($val, bg);
+      box-shadow: 1px 1px 22px lighten(map-get($val, txt), 35);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      @media (max-width:1240px) {
+          font-size: map-get($val, byline-size)*0.85;
+      }
+      .menu__title {
+        font-family: map-get($val, font-title);
+        font-size: map-get($val, title-size);
+        font-weight: lighter;
+        width: auto;
+        text-align: center;
+        @media (max-width:1240px) {
+            font-size: map-get($val, title-size)*0.85;
+        }
+        @media (max-width:1170px) {
+            font-size: map-get($val, title-size)*0.65;
+        }
+        @media (max-width:768px) {
+        }
+        }
+      }
+    }
+}
+
+@mixin gradient($map) {
+    @each $card-number, $val in $map {
+        &--gradient-#{$card-number} {
+            &::before{
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: unquote(linear-gradient(to right,map-get($val, txt), map-get($val, gradient)));
+                pointer-events: none;
+                content: '';
+                display: block;
+                mix-blend-mode: lighten;
+            }
+        }
+    }
+}
+
+@mixin underline($map) {
+    @each $card-number, $val in $map {
+        &--style-#{$card-number} {
+            &::after {
+                content: '';
+                transform-origin: left; 
+                transform: scaleX(0);
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: .1em; 
+                background: map-get($val, txt);
+                transition: transform .6s;
+            }
+        }
+    }
+}
+@mixin underline-custom($map) {
+    @each $custom-number, $val in $map {
+        &--underline-#{$custom-number} {
+            &::after {
+                content: '';
+                transform-origin: left; 
+                transform: scaleX(0);
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: .1em; 
+                background: map-get($val, underline);
+                transition: transform .6s;
+            }
+        }
+    }
+}

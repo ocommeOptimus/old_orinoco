@@ -14,62 +14,94 @@
         <script type="text/javascript" src="script.js"></script>
     </head>
     <body id="homepage">
-        <header>
-            <a href="#">
+        <header class="header">
+            <a class="header__link" href="#">
                 <img class="header__logo" src="./img/logo.png">
             </a>
+            <a id="btn-cart" href=".src/pages/cart.html" class="header__link--icons">
+                <img class="header__cart-img" src="./img/cart.png" alt="Image caddie">
+            </a>
         </header>
+        
+        <div class="container">
+            <div class="presentation">
+                <h1 class="presentation__title">
+                    Changez votre approche du e-commerce, adoptez Orinoco !
+                </h1>
+                <p class="presentation__text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et mi sed orci consectetur bibendum sit amet sit amet neque. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi ultricies ornare faucibus. Ut nec elit auctor, commodo metus sed, mattis nunc. Cras sed ultricies lectus. Vestibulum interdum augue sed ante euismod, nec efficitur odio efficitur. Sed ac aliquet lacus, non bibendum erat. Quisque condimentum efficitur eleifend. In interdum est a augue suscipit, id porttitor odio pretium. Aliquam aliquam, dui non dignissim rutrum, lacus libero auctor dolor, suscipit lacinia quam dui sit amet augue.
+                </p>
+            </div>
+        </div>
+
         <div class="container">
             <div class="cards">
+                <h2 class="cards__presentation">
+                    Decouvrez nos produits :
+                </h2>
                 <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="./img/teddy_1.jpg"
+                    <div class="card__inner">
+                        <div class="card__front">
+                            <img class="card__img" src="./img/teddy_1.jpg"
                                 alt="Ours en peluche">
                         </div>
-                        <div class="card-back">
-                            <h3>OriTeddybear</h3>
-                            <p>Découvrez nos ours en peluches fait main !</p>
+                        <div class="card__back">
+                            <h3 class="card__title">OriTeddybear</h3>
+                            <p class="card__text">Découvrez nos ours en peluches fait main !</p>
                         </div>
                     </div>
                 </div>
     
                 <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="./img/vcam_1.jpg"
+                    <div class="card__inner">
+                        <div class="card__front">
+                            <img class="card__img" src="./img/vcam_5.jpg"
                                 alt="Appareil photo Zeiss Icon">
                         </div>
-                        <div class="card-back">
-                            <h3>OriCameras</h3>
-                            <p>Donnez du charme à vos clichés avec nos caméras vintage !</p>
+                        <div class="card__back">
+                            <h3 class="card__title">OriCameras</h3>
+                            <p class="card__text">Donnez du charme à vos clichés avec nos caméras vintage !</p>
                         </div>
                     </div>
                 </div>
     
                 <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <img src="./img/oak_1.jpg"
+                    <div class="card__inner">
+                        <div class="card__front">
+                            <img class="card__img" src="./img/oak_1.jpg"
                                 alt="Tabouret en chêne massif">
                         </div>
-                        <div class="card-back">
-                            <h3>OriFurnitures</h3>
-                            <p>Ne manquyez pas nos meubles en chêne qui donneront du cachet à votre intérieur !</p>
+                        <div class="card__back">
+                            <h3 class="card__title">OriFurnitures</h3>
+                            <p class="card__text">Ne manquyez pas nos meubles en chêne qui donneront du cachet à votre intérieur !</p>
                         </div>
                     </div>
                 </div>
-        <footer>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="our-promises">
+                <h2 class="our-promises__title">
+                    Des produits concus et valides par des specialistes dans leurs domaines
+                </h2>
+                <p class="our-promises__text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et mi sed orci consectetur bibendum sit amet sit amet neque. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi ultricies ornare faucibus. Ut nec elit auctor, commodo metus sed, mattis nunc. Cras sed ultricies lectus. Vestibulum interdum augue sed ante euismod, nec efficitur odio efficitur. Sed ac aliquet lacus, non bibendum erat. Quisque condimentum efficitur eleifend. In interdum est a augue suscipit, id porttitor odio pretium. Aliquam aliquam, dui non dignissim rutrum, lacus libero auctor dolor, suscipit lacinia quam dui sit amet augue.
+                </p>
+            </div>
+        </div>
+
+        <footer class="footer">
             <div class="footer__info">
                 <ul>
                     <li class="footer__link-left"> 
-                        <a class="footer__link-text" href="./src/pages/legalnotice.html" target="_blank">A propos de nous</a> 
+                        <a class="footer__link-text" href="./src/pages/aboutus.html" target="_blank">A propos de nous</a> 
                     </li>
                     <li class="footer__link-middle"> 
                         <a class="footer__link-text" href="./src/pages/legalnotice.html" target="_blank">Mentions légales</a> 
                     </li>
                     <li class="footer__link-right"> 
-                        <a class="footer__link-text" href="mailto:contact@ohmyfood.com">Contactez-nous</a> 
+                        <a class="footer__link-text" href="mailto:contact@orinoco.com">Contactez-nous</a> 
                     </li>
                 </ul>
             </div>
