@@ -6,6 +6,8 @@
   "scripts": {
     "sass": "sass --watch ./assets/scss/main.scss:./assets/css/style.css",
     "prefix": "postcss ./assets/css/style.css --use autoprefixer -d ./assets/css/",
+    "build": "webpack",
+    "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,5 +19,14 @@
   "bugs": {
     "url": "https://github.com/ocommeOptimus/orinoco/issues"
   },
-  "homepage": "https://github.com/ocommeOptimus/orinoco#readme"
+  "homepage": "https://github.com/ocommeOptimus/orinoco#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
+    "babel-polyfill": "^6.26.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
 }
