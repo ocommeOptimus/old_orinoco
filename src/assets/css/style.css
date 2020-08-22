@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -36,12 +37,120 @@
 }
 
 .card-inner {
+=======
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  background-image: url(../../../img/triangle-mosaic.png);
+  margin-bottom: 145px;
+}
+@media (max-width: 992px) {
+  body {
+    margin-bottom: 100px;
+  }
+}
+@media (max-width: 576px) {
+  body {
+    margin-bottom: 75px;
+  }
+}
+
+@font-face {
+  font-family: "montserrat";
+  src: url("../../fonts/montserrat.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "milkman";
+  src: url("../../fonts/milkmanconspiracy.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: "montserrat", sans-serif;
+  color: #e9cbce;
+  font-size: 2rem;
+  font-weight: 100;
+  line-height: 1.7;
+}
+
+h1 {
+  font-family: "milkman", sans-serif;
+  font-weight: 900;
+  font-size: 5rem;
+}
+
+h2 {
+  font-family: "milkman", sans-serif;
+  font-weight: 900;
+  font-size: 4.5rem;
+}
+
+textarea {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-size: 2rem;
+}
+
+button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 2.75rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.cards, .card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cards__presentation {
+  width: 100%;
+  padding-bottom: 75px;
+  text-align: center;
+  color: #322d36;
+  font-size: 6.5rem;
+  transition: all 250ms;
+}
+.cards__presentation:hover {
+  cursor: default;
+  color: #c3717a;
+}
+
+.card {
+  cursor: pointer;
+  background-color: transparent;
+  height: 300px;
+  perspective: 1000px;
+  margin: 1rem;
+}
+.card__inner {
+>>>>>>> HTML
   position: relative;
   width: 360px;
   height: 100%;
   transition: transform 0.9s;
   transform-style: preserve-3d;
 }
+<<<<<<< HEAD
 
 .card:hover .card-inner {
   transform: rotateY(180deg);
@@ -49,11 +158,18 @@
 
 .card-front,
 .card-back {
+=======
+.card__inner:hover {
+  transform: rotateY(180deg);
+}
+.card__front, .card__back {
+>>>>>>> HTML
   position: absolute;
   width: 360px;
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+<<<<<<< HEAD
 }
 
 .card-back {
@@ -62,5 +178,183 @@
   padding: 1.5rem;
   transform: rotateY(180deg);
 }
+=======
+  border-radius: 3px;
+}
+.card__img {
+  width: 360px;
+  height: 300px;
+  object-fit: cover;
+  border: 1px #c3a7fe solid;
+  border-radius: 3px;
+}
+.card__back {
+  background-image: url(../../../img/folk-pattern-black.png);
+  color: #fff;
+  padding: 2rem;
+  transform: rotateY(180deg);
+}
+.card__title {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-family: "milkman", sans-serif;
+  font-size: 3rem;
+  word-spacing: 3px;
+}
+.card__text {
+  opacity: 0.85;
+  font-size: 2rem;
+  line-height: 2.4;
+  text-align: center;
+}
+
+.header {
+  background: #f3e9f1;
+  height: 245px;
+  border-bottom: 2px solid white;
+  padding: 0 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+@media (max-width: 992px) {
+  .header {
+    height: 220px;
+  }
+}
+@media (max-width: 576px) {
+  .header {
+    height: 195px;
+  }
+}
+.header__link {
+  margin: auto;
+}
+.header__logo {
+  width: auto;
+}
+@media (max-width: 922px) {
+  .header__logo {
+    height: 65px;
+  }
+}
+.header__cart-img {
+  height: 75px;
+}
+
+.nav__link {
+  display: inline;
+  font-size: 2.5rem;
+}
+.nav__link a {
+  text-decoration: none;
+  color: #322d36;
+}
+.nav__link--active {
+  color: #8f5bfe;
+}
+.nav__link--active:hover {
+  cursor: default;
+  color: #8f5bfe;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #e9cbce;
+  height: 140px;
+  width: 100%;
+}
+@media (max-width: 992px) {
+  .footer {
+    height: 115px;
+  }
+}
+@media (max-width: 576px) {
+  .footer {
+    height: 90px;
+  }
+}
+.footer__info {
+  width: auto;
+  height: 100%;
+}
+.footer__info ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 35px 30px;
+}
+@media (max-width: 992px) {
+  .footer__info ul {
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 30px;
+  }
+}
+@media (max-width: 576px) {
+  .footer__info ul {
+    padding: 5px 15px;
+  }
+}
+.footer__link-left, .footer__link-middle, .footer__link-right {
+  display: inline;
+  color: #322d36;
+  font-size: 3rem;
+}
+.footer__link-left:hover, .footer__link-middle:hover, .footer__link-right:hover {
+  animation: footer-shake 600ms infinite ease-in-out alternate;
+}
+@media (max-width: 992px) {
+  .footer__link-left, .footer__link-middle, .footer__link-right {
+    font-size: 3rem;
+  }
+}
+@media (max-width: 576px) {
+  .footer__link-left, .footer__link-middle, .footer__link-right {
+    font-size: 2.5rem;
+  }
+}
+.footer__link-text {
+  text-decoration: none;
+  color: #322d36;
+  transition: all 250ms;
+}
+.footer__link-text:hover {
+  color: #c3717a;
+}
+
+@keyframes footer-shake {
+  25% {
+    transform: translateX(2%);
+  }
+  75% {
+    transform: translateX(-2%);
+  }
+}
+.presentation, .our-promises {
+  margin: auto;
+  padding: 100px 0px;
+  width: 50%;
+}
+.presentation__title, .our-promises__title {
+  text-align: center;
+  font-size: 6.5rem;
+  color: #322d36;
+}
+.presentation__text, .our-promises__text {
+  font-family: "milkman", sans-serif;
+  text-align: justify;
+  font-size: 3.5rem;
+  color: #595060;
+  line-height: 1;
+  padding-top: 50px;
+}
+>>>>>>> HTML
 
 /*# sourceMappingURL=style.css.map */

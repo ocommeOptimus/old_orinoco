@@ -1,64 +1,68 @@
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+.cards, .card {
+    @include flex;
 }
-
+.cards__presentation {
+    width: 100%;
+    padding-bottom: 75px;
+    text-align: center;
+    color: $colour-txt;
+    font-size: 6.5rem;
+    transition: all 250ms;
+    &:hover {
+        cursor: default;
+        color: darken($colour-primary, 25);
+    }
+}
+   
 .card {
-  cursor: pointer;
-  background-color: transparent;
-  height: 300px;
-  perspective: 1000px;
-  margin: 1rem;
-}
-
-.card h3 {
-  border-bottom: 1px #fff solid;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 1.6rem;
-  word-spacing: 3px;
-}
-
-.card p{
-  opacity: 0.75;
-  font-size: 0.8rem;
-  line-height: 1.4;
-}
-
-.card img {
-  width: 360px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 3px;
-}
-
-.card-inner {
-  position: relative;
-  width: 360px;
-  height: 100%;
-  transition: transform 0.9s;
-  transform-style: preserve-3d;
-}
-
-.card:hover .card-inner {
-  transform: rotateY(180deg);
-}
-
-.card-front,
-.card-back {
-  position: absolute;
-  width: 360px;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.card-back {
-  background-color: #222;
-  color: #fff;
-  padding: 1.5rem;
-  transform: rotateY(180deg);
+    cursor: pointer;
+    background-color: transparent;
+    height: 300px;
+    perspective: 1000px;
+    margin: 1rem;
+    &__inner {
+    position: relative;
+    width: 360px;
+    height: 100%;
+    transition: transform 0.9s;
+    transform-style: preserve-3d;
+    &:hover {
+        transform: rotateY(180deg);
+        }
+    }
+    &__front, &__back {
+    position: absolute;
+    width: 360px;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 3px;
+    }
+    &__img {
+    width: 360px;
+    height: 300px;
+    object-fit: cover;
+    border: 1px lighten($colour-secondary, 15) solid;
+    border-radius: 3px;
+    }
+    &__back {
+    background-image: url(../../../img/folk-pattern-black.png);
+    color: #fff;
+    padding: 2rem;
+    transform: rotateY(180deg);
+    }
+    &__title {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-family: 'milkman', sans-serif;
+    font-size: 3rem;
+    word-spacing: 3px;
+    }
+    &__text {
+    opacity: 0.85;
+    font-size: 2rem;
+    line-height: 2.4;
+    text-align: center;
+    }
 }
