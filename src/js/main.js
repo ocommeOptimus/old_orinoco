@@ -64,4 +64,11 @@ function cartProductsNumber(){
   }
 }
 
-export {myPopUp, getData, urlStr, cartProductsNumber};
+//Function to convert price in euro
+function priceCalculation(price, priceText, text) {
+  let euros = price/100;
+  priceText.textContent = text + new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(euros);
+  return euros;
+}
+
+export {myPopUp, getData, urlStr, cartProductsNumber, priceCalculation};
