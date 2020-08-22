@@ -1,6 +1,5 @@
 import {getData, urlStr, priceCalculation, cartProductsNumber, myPopUp} from "./main";
 
-//calling the cartProductsNumber function
 cartProductsNumber();
 
 let titlePage = document.createElement('h1');
@@ -14,7 +13,6 @@ imgLoader.src = "../../img/loader.svg" ;
 document.getElementById('product-details').appendChild(titlePage);
 document.getElementById('product-details').appendChild(imgLoader);
 
-//Calling of the promise
 getData('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id"))
 .then(function (response) {
     document.getElementById('product-details').removeChild(imgLoader);

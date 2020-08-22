@@ -1,4 +1,4 @@
-import {cartProductsNumber, getData, priceCalculation} from "./main";
+import {cartProductsNumber, myPopUp, priceCalculation} from "./main";
 import Swal from "sweetalert2";
 
 cartProductsNumber();
@@ -92,7 +92,7 @@ if (productsAddedToCart !== null) {
                 }).then((result) => {
                     if (result.value) {
                         //Popup for confirmed deletion
-                        getData('success', 'L\'article a été supprimé !', `${productsAddedToCart[i].name} n'est plus dans votre panier`, '2000')
+                        myPopUp('success', 'L\'article a été supprimé !', `${productsAddedToCart[i].name} n'est plus dans votre panier`, '2000')
                         setTimeout(function () {
                             productsAddedToCart.splice([i], 1);  //deleting that product of local storage
                             localStorage.setItem('cart', JSON.stringify(productsAddedToCart)); //updating the localStorage
@@ -104,7 +104,7 @@ if (productsAddedToCart !== null) {
                         }, 2200)
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
                         //Popup for cancelled deletion
-                        getData('success', 'L\'article a été conservé',`Vous pouvez commander ${productsAddedToCart[i].name}`, '2000')
+                        myPopUp('success', 'L\'article a été conservé',`Vous pouvez commander ${productsAddedToCart[i].name}`, '2000')
                     }
                 })
             } else { //Else, reducing product's quantity, updating localStorage and reloading cart's page
@@ -165,7 +165,7 @@ function sending(url, order) {
                     resolve(response = JSON.parse(this.responseText), orderIds.push(new OrderConfirm(response.orderId, JSON.parse(localStorage.getItem('paramOrder')))), localStorage.setItem('orderId', JSON.stringify(orderIds)), localStorage.setItem('contact', JSON.stringify(response.contact)));
                 } else {
                     reject(
-                        getData('error', 'Erreur' + this.satus, 'Une erreur est survenue, merci de réessayer ultérieurement', '2000'), setTimeout(function(){location.reload()}, 3000)
+                        myPopUp('error', 'Erreur' + this.satus, 'Une erreur est survenue, merci de réessayer ultérieurement', '2000'), setTimeout(function(){location.reload()}, 3000)
                     );
                 }
             }
@@ -219,14 +219,14 @@ if (productsAddedToCart !== null) { //If there is product(s) added in localStora
                  </form>`;
 
     //Placing form in cart page
-    document.getElementById('cart').appendChild(sectionForm);
+    document.querySelector('#cart').appendChild(sectionForm);
     sectionForm.appendChild(divTitleForm);
     divTitleForm.appendChild(imgPlaceOrder);
     divTitleForm.appendChild(titleForm);
     sectionForm.appendChild(divForm);
 
     //Adding an event listener on the submit button
-    document.getElementById('btn-submit').addEventListener('click', function (event) {
+    document.querySelector('#btn-submit').addEventListener('click', function (event) {
         //Creating class for sending contact infos
         class Contact {
             constructor(firstName, lastName, address, city, email) {
@@ -237,7 +237,7 @@ if (productsAddedToCart !== null) { //If there is product(s) added in localStora
                 this.email = email;
             }
         }
-        //Creating a class to post contact's object and products' array to server
+        //Creating a class to post contact's object and product's array to server
         class FormSent {
             constructor(user, products) {
                 this.contact = user;
@@ -255,14 +255,14 @@ if (productsAddedToCart !== null) { //If there is product(s) added in localStora
         //Initializing array for products Ordered
         let productsOrdered = [];
         //Checking the form validity
-        if (!document.getElementById('form').checkValidity()) {
+        if (!document.querySelector('#form').checkValidity()) {
             //Form isn't valid: preventing the submit
             event.preventDefault();
             //Popup for invalid form
-            getData(2500, 'Merci de renseigner tous les champs du formulaire !', 'https://media1.tenor.com/images/8bce66c7f447d8b7cfce2cfe1da61782/tenor.gif?itemid=11295732');
+            myPopUp('error', 'Formulaire invalide','Merci de bien renseigner tous les champs du formulaire !', '2000');
         } else {
             //Form is valid: creating the user contact infos
-            let newContact = new Contact(document.getElementById('firstName').value, document.getElementById('lastName').value, document.getElementById('address').value, document.getElementById('city').value, document.getElementById('email').value);
+            let newContact = new Contact(document.querySelector('#firstName').value, document.querySelector('#lastName').value, document.querySelector('#address').value, document.querySelector('#city').value, document.querySelector('#email').value);
 
             //Initializing an array to push the Confirm class into it
             let confirm = [];
@@ -298,6 +298,23 @@ if (productsAddedToCart !== null) { //If there is product(s) added in localStora
     });
 }
 
+if (productsAddedToCart === null) { //If the cart is empty, creating a button to go back to homepage
+    sectionCart.id = "cart-empty";
+    let textEmptyCart = document.createElement('h2');
+    textEmptyCart.textContent = "Votre panier est vide !!";
+    textEmptyCart.className = "cart__empty-title";
 
-require("./suggestions");
+    //Creating button to go back to Homepage
+    let buttonReturnHomepage = document.createElement('button');
+    buttonReturnHomepage.textContent = "Nos produits";
+    buttonReturnHomepage.className = "cart__home-btn"
+    buttonReturnHomepage.addEventListener('click', function (event) {
+        window.location.href = "../../index.html";
+    });
+
+    //Placing all elements in the cart page
+    sectionCart.appendChild(textEmptyCart);
+    sectionCart.appendChild(buttonReturnHomepage);
+}
+
 export {productsAddedToCart, sectionCart};
