@@ -1,20 +1,4 @@
-import retrieveContent from './query.js';
 import Swal from "sweetalert2";
-
-async function showContent() {
-  try {
-    const content = await retrieveContent();
-
-    let elt = document.createElement('div');
-    elt.innerHTML = content.join('<br />');
-
-    document.getElementsByTagName('body')[0].appendChild(elt);
-  } catch (e) {
-    console.log('Error', e);
-  }
-}
-
-showContent();
 
 //Show a popup message
 function myPopUp(myIcon, myMessage, myText, myTimer) {
@@ -28,19 +12,24 @@ function myPopUp(myIcon, myMessage, myText, myTimer) {
   })
 }
 
-//Get the request data
-function getData(url){ 
-  var request = new XMLHttpRequest();
-  request.onreadystatechange = function() {
-      if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-          return JSON.parse(this.responseText);
-      } else {
-        myPopUp('error', 'Erreur' + this.status, 'Une erreur est survenue, merci de réessayer ultérieurement', '2000')
-        setTimeout(function(){location.reload()}, 3000), "/error.html";
+function getData(url) {
+  fetch(url)
+    .then(
+      function(response) {
+        if (response.status !== 200) {
+          myPopUp('error', 'Erreur ' + response.status, 'Une erreur est survenue, merci de réessayer ultérieurement', '2000')
+          return;
+        }
+
+        // Examine the text in the response
+        response.json().then(function(data) {
+          console.log(data);
+        });
       }
-  };
-  request.open("GET", url);
-  request.send();
+    )
+    .catch(function(err) {
+      console.log('Fetch Error :-S', err);
+    });
 }
 
 //Get Product ID

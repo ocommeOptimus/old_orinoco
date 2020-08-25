@@ -1,20 +1,4 @@
-import retrieveContent from './query.js';
 import {getData, cartProductsNumber} from "./main";
-
-async function showContent() {
-  try {
-    const content = await retrieveContent();
-
-    let elt = document.createElement('div');
-    elt.innerHTML = content.join('<br />');
-
-    document.getElementsByTagName('body')[0].appendChild(elt);
-  } catch (e) {
-    console.log('Error', e);
-  }
-}
-
-showContent();
 
 cartProductsNumber();
 let isClicked = false;
@@ -22,18 +6,18 @@ let currentParam = 'teddies';
 
 function getItems(param) {
     //Creating the list container
-    document.querySelector('#homepage').style.height = 'auto';
+    document.querySelector('#body').style.height = 'auto';
     var loaderIcon = document.createElement('img');
     loaderIcon.classList.add("loader");
     loaderIcon.src = "../../img/loader.svg" ;
     var productsList = document.createElement('div');
     productsList.classList.add("products");
     productsList.id = 'products-list';
-    document.getElementById('homepage').appendChild(productsList);
+    document.querySelector('#homepage').appendChild(productsList);
     productsList.appendChild(loaderIcon);
 
     //Checking if a button has alrealdy been clicked and which product type is called
-    if (isClicked === true) { //If a button has already been clicked and the product type is different,
+    if (isClicked === true && currentParam == param) { //If a button has already been clicked and the product type is different,
         document.getElementById('products-list').remove(); //Deleting the previous products list
     }
     else if (isClicked === false || currentParam !== param) {
