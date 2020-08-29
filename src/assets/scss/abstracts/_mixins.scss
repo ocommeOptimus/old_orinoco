@@ -31,20 +31,6 @@
     }
 }
 
-@mixin box-anim-hover($map){
-    @each $card-number, $val in $map {
-        @keyframes menu-hover-#{$card-number} {
-            0%{
-                opacity: 0.9;
-            }
-            100%{
-                opacity: 0.8;
-                box-shadow: 1px 1px 28px darken(map-get($val, txt), 3);
-            }
-        }
-    }
-}
-
 @mixin card-preview($map) {
     @each $card-number, $val in $map{
       &--style-#{$card-number}{

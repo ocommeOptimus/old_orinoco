@@ -1,46 +1,65 @@
-import {getData, urlStr, priceCalculation, cartProductsNumber, myPopUp} from "./main";
+import {urlStr, priceCalculation, cartProductsNumber, myPopUp} from "./main";
 
 cartProductsNumber();
 
-let titlePage = document.createElement('h1');
-titlePage.textContent = "Votre produit :";
-titlePage.className = "presentation__title";
+let productsDetails             = document.querySelector('#product-details');
 
-let imgLoader = document.createElement('img');
-imgLoader.className = "loader";
-imgLoader.src = "../../img/loader.svg" ;
+let titlePage                   = document.createElement('h1');
+let imgLoader                   = document.createElement('img');
 
-document.getElementById('product-details').appendChild(titlePage);
-document.getElementById('product-details').appendChild(imgLoader);
+titlePage.className             = "presentation__title";
 
-getData('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id"))
+imgLoader.className             = "loader";
+imgLoader.src                   = "../../img/loader.svg" ;
+
+productsDetails.appendChild(titlePage);
+productsDetails.appendChild(imgLoader);
+
+fetch('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id"))
 .then(function (response) {
-    document.getElementById('product-details').removeChild(imgLoader);
-    let sectionProducts = document.createElement('section');
-    let imageProducts = document.createElement('img');
-    imageProducts.className = "product-details__img";
-    imageProducts.src = response.imageUrl;
-    imageProducts.alt = "Photo " + urlStr.get('type') + " " + response.name;
-    imageProducts.title = "Photo de présentation " + urlStr.get('type') + " " + response.name;
-    let divProducts = document.createElement('div');
-    divProducts.className = "product-details__info";
-    let titleProducts = document.createElement('h2');
-    titleProducts.textContent = response.name;
-    titleProducts.className = "product-details__title";
-    let refProduct = document.createElement('p');
-    refProduct.textContent = "Ref: " + response._id;
-    refProduct.className = "product-details__ref";
+    if (!response.ok) {
+      throw new Error('HTTP error, status = ' + response.status);
+    }
+    return response.json();
+  }).then(function (data) {
+    //We remove the loader icon after 0.3s
+    setTimeout(function() { productsDetails.removeChild(imgLoader); }, 300);  
+    
+    //We set an h1 with the name of the product
+    titlePage.textContent = "Les " + urlStr.get('type') + " " + data.name;
 
-    let descriptionProducts = document.createElement('p');
-    descriptionProducts.textContent = response.description;
+    //We create HTML structure
+    let sectionProducts         = document.createElement('section');
+    let imageProducts           = document.createElement('img');
+    let divProducts             = document.createElement('div');
+    let refProduct              = document.createElement('p');
+    let titleProducts           = document.createElement('h2');
+    let descriptionProducts     = document.createElement('p');
+    let labelSelect             = document.createElement('label');
+    let selectProduct           = document.createElement('select');
+
+    sectionProducts.className   = "product-details__section";
+
+    imageProducts.className     = "product-details__img";
+    imageProducts.src           = data.imageUrl;
+    imageProducts.alt           = "Photo " + urlStr.get('type') + " " + data.name;
+    imageProducts.title         = "Photo de présentation " + urlStr.get('type') + " " + data.name;
+    
+    divProducts.className       = "product-details__info";
+    
+    titleProducts.textContent   = data.name;
+    titleProducts.className     = "product-details__title";
+    
+    refProduct.textContent      = "Ref: " + data._id;
+    refProduct.className        = "product-details__ref";
+    
+    descriptionProducts.textContent = data.description;
     descriptionProducts.className = "product-details__text";
-
-    let labelSelect = document.createElement('label');
-    labelSelect.for = "option-product";
-    labelSelect.textContent = "Options : ";
-    labelSelect.id = "labelOptions";
-    let selectProduct = document.createElement('select');
-
+    
+    labelSelect.for             = "option-product";
+    labelSelect.textContent     = "Options : ";
+    labelSelect.className       = "product-details__options";
+    
     //Switching option property according to URL's param
     let firstProperty = "";
     switch (urlStr.get('type')) {
@@ -57,7 +76,7 @@ getData('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id
 
     //Getting all options
     function getAllOptions(value) {
-        response[value].forEach((value, index) => {
+        data[value].forEach((value, index) => {
             let option = document.createElement('option');
             let optionValue = document.createTextNode(value);
             option.appendChild(optionValue);
@@ -69,13 +88,15 @@ getData('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id
     getAllOptions(firstProperty);
 
     //Possibility to choose quantity
-    let quantity = document.createElement('label');
-    quantity.for = "quantity";
-    quantity.textContent = "Quantité : ";
-    quantity.className = "product-details__quantity";
-    let selectQuantity = document.createElement('select');
-    selectQuantity.name = "quantity";
-    selectQuantity.id = "quantityChoose";
+    let quantity                = document.createElement('label');
+    let selectQuantity          = document.createElement('select');
+    
+    quantity.for                = "quantity";
+    quantity.textContent        = "Quantité : ";
+    quantity.className          = "product-details__quantity";
+    
+    selectQuantity.name         = "quantity";
+    selectQuantity.id           = "quantityChoose";
 
     //Creating possibility to choose quantity of each products
     function optionQuantity() {
@@ -92,12 +113,14 @@ getData('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id
     optionQuantity();
 
     let priceProduct = document.createElement('p');
-    let priceLength = response.price;
+    priceProduct.className = "product-details__price";
+    let priceLength = data.price;
     //Converting the price in euro
     priceCalculation(priceLength, priceProduct, `Prix : `);
 
     //Parametring the buttonCart
     let buttonCart = document.createElement('button');
+    buttonCart.className = "product-details__btn";
     buttonCart.textContent = 'Ajouter au panier';
 
     //When clicking on the buttonCart
@@ -121,31 +144,32 @@ getData('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id
         if (cartUp === null) {
             //if this is the first product added, creating new line and stocking it
             let cart = [];
-            let firstLine = new Line(urlStr.get('type'), response.imageUrl, response.name, response._id, parseInt(quantityChoose.value), response.price);
+            let firstLine = new Line(urlStr.get('type'), data.imageUrl, data.name, data._id, parseInt(quantityChoose.value), data.price);
             cart.push(firstLine);
             localStorage.setItem('cart', JSON.stringify(cart));
+            
             //Popup for product added
-            myPopUp('success', 'Félicitations', 'Produit ajouté au panier !', '2000');
-            setTimeout(function(){location.reload();}, 2000);
+            myPopUp('success', 'Felicitations', 'Produit ajouté au panier !', '2000');
+
         } else {
             //Else, verifying if the product has already been added
             let cartFill = JSON.parse(localStorage.getItem('cart'));
             let productAlreadyAdded = false;
             for (let k in cartFill) {
                 //If the product is already added, we modify its quantity
-                if (cartFill[k].id === response._id) {
+                if (cartFill[k].id === data._id) {
                     productAlreadyAdded = true;
                     cartFill[k].quantity = parseInt(cartFill[k].quantity) + parseInt(quantityChoose.value);
                     //Popup for modified quantity
-                    myPopUp('success', 'Quantité modifiée !', 'Votre choix a bien été pris en compte !', '2000');
+                    myPopUp('success', 'Quantite modifiee !', 'Votre choix a bien ete pris en compte !', '2000');
                     setTimeout(function(){location.reload();}, 2000);
                 }
             }
             //If the product isn't already added, we add it
             if (!productAlreadyAdded) {
-                cartFill.push(new Line(urlStr.get('type'), response.imageUrl, response.name, response._id, parseInt(quantityChoose.value), response.price));
+                cartFill.push(new Line(urlStr.get('type'), data.imageUrl, data.name, data._id, parseInt(quantityChoose.value), data.price));
                 //Popup for new product added
-                myPopUp('success', 'Félicitations', 'Produit ajouté au panier !', '2000');
+                myPopUp('success', 'Felicitations', 'Produit ajoute au panier !', '2000');
                 setTimeout(function(){location.reload();}, 2000);
             }
             localStorage.setItem('cart', JSON.stringify(cartFill));
@@ -153,7 +177,7 @@ getData('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id
     });
 
     //Placing all elements in the product page
-    document.getElementById('product-details').appendChild(sectionProducts);
+    productsDetails.appendChild(sectionProducts);
     sectionProducts.appendChild(imageProducts);
     sectionProducts.appendChild(divProducts);
     divProducts.appendChild(titleProducts);

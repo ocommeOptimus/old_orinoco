@@ -1,0 +1,56 @@
+.products {
+    @include flex;
+    &__type {
+        width: 100%;
+        margin: 50px;
+        color: $colour-txt;
+        text-align: center;
+        font-size: 6rem;
+    }
+    &__article {
+        box-shadow: 1px 1px 11px darken($colour-bg-nav, 15);
+        background-color: $colour-bg-nav;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 90%;
+        min-height: 400px;
+        border-radius: 3px;
+        margin: 30px;
+        transition: all 0.9s;
+        &:hover {
+            box-shadow: 1px 1px 22px darken($colour-bg-nav, 35);
+            animation: bg-fade $anim-dur 1 ease-in-out alternate;
+        }
+    }
+    &__img {
+        width: 360px;
+        border-radius: 5px;
+        margin: 15px 50px;
+    }
+    &__title {
+        font-family: 'milkman', sans-serif;
+        color: lighten($colour-secondary, 10);
+        font-size: 4.5rem;
+        padding-bottom: 30px;
+        transition: all 0.9s;
+        &:hover {
+            color: darken($colour-primary, 25);
+        }
+    }
+    &__text {
+        color: lighten($colour-secondary, 15);
+    }
+}
+
+@keyframes bg-fade {
+    0%{
+        background-color: fade($colour-bg-nav, 90%);
+    }
+    50%{
+        background-color: fade(red, 40%);
+    }
+    100%{
+        background-color: fade($colour-bg-nav, 95%);
+    }
+}

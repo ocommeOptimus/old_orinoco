@@ -11,19 +11,20 @@
         <title>Orinoco - Entreprise de commerce en ligne</title>
         <meta name="description" content="Orinoco se démarque des grands sites e-commerce en créant des applications thématiques ne vendant qu'un seul groupe de produits.">
 
-        <script type="text/javascript" src="script.js"></script>
     </head>
     <body id="products-page">
-        <header class="header">
-            <a class="header__link" href="#">
+        <header class="header">  
+            <a class="header__link" href="../../index.html">
                 <img class="header__logo" src="../../img/logo.png">
             </a>
+            <p id="return">-</p>    
             <a id="btn-cart" href="./cart.html" class="header__link--icons">
                 <img class="header__cart-img" src="../../img/cart.png" alt="Image caddie">
+                <p class="header__cart-num" id="cart-num"></p>
             </a>
         </header>
         
-        <div class="container" id="product-details">
+        <div class="product-details" id="product-details">
         </div>
 
         <footer class="footer">
@@ -41,7 +42,6 @@
                 </ul>
             </div>
         </footer>
-        <script src="./../dist/polyfill.bundle.js"></script>
         <script src="../../dist/products.bundle.js"></script>
     </body>
 </html>

@@ -1,0 +1,56 @@
+.product-details {
+    margin: 100px auto;
+    &__section {
+        @include flex;
+        margin: 50px auto;
+        padding: 50px 0;
+        width: 95%;
+        border-radius: 3px;
+        box-shadow: 1px 1px 11px darken($colour-bg-nav, 15);
+        background-color: $colour-bg-nav;
+    }
+    &__img {
+        width: 640px;
+        border-radius: 5px;
+        margin: auto;
+    }
+    &__info {
+        margin: auto;
+        line-height: 1.6;
+    }
+    &__ref {
+        font-style: italic;
+        opacity: 0.5;
+    }
+    &__text {
+        width: 70%;
+        margin: 15px 0;
+    }
+    &__options, &__quantity {
+        display: block;
+    }
+    &__price {
+        margin-top: 15px;
+        color: darken($colour-primary, 15);
+        font-weight: 600;
+    }
+    &__btn {
+        border: 3px solid lighten($colour-secondary, 15);
+        border-radius: 5px;
+        padding: 10px;
+        background-color: lighten($colour-secondary, 15);
+        color: lighten($colour-bg-nav, 5);
+        font-size: 1.75rem;
+        margin-top: 30px;
+        transition: all 0.5s;
+        &:hover {
+            border: 3px solid $colour-secondary;
+            background-color: $colour-secondary;
+            color: lighten($colour-bg-nav, 15);
+        }
+    }
+}
+.loader {
+    display: block;
+    margin: auto;
+}

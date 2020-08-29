@@ -33,18 +33,18 @@ function getData(url) {
 }
 
 //Get Product ID
-var queryStr = window.location.search;
-var urlStr = new URLSearchParams(queryStr);
+let queryStr = window.location.search;
+let urlStr = new URLSearchParams(queryStr);
 
 //Show the number of products added to the cart
 function cartProductsNumber(){
-  var productsAdded;
+  let productsAdded;
   if (JSON.parse(localStorage.getItem('cart')) === null) {
       productsAdded = 0;
   }
   else {
     productsAdded = JSON.parse(localStorage.getItem('cart')).length;
-    if (document.querySelector('#return')) {
+    if (document.querySelector('#btn-cart')) {
         document.querySelector('#cart-num').innerHTML = "( " + productsAdded + " )";
     }
     else {
