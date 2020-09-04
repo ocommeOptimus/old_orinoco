@@ -7,28 +7,25 @@ cartProductsNumber();
 let productsAddedToCart = JSON.parse(localStorage.getItem('cart'));
 
 //Creating the cart display
-let titleCart = document.createElement('h1');
-titleCart.textContent = "Panier";
-titleCart.className = "presentation__title";
-document.querySelector('#cart').appendChild(titleCart);
+let titleCart           = document.createElement('h1');
+let sectionCart         = document.createElement('section');
 
-let sectionCart = document.createElement('section');
+titleCart.textContent   = "Panier";
+titleCart.className     = "presentation__title";
+
+document.querySelector('#cart').appendChild(titleCart);
 document.querySelector('#cart').appendChild(sectionCart);
 
 
 //If there is product(s) added in the localStorage
 if (productsAddedToCart !== null) {
-    sectionCart.className = "cart__products";
-    let sectionTitle = document.createElement('h2');
-    sectionTitle.textContent = "Produit(s) Ajouté(s)";
-    sectionTitle.className = "cart__title";
-    sectionCart.appendChild(sectionTitle);
+    sectionCart.className       = "cart__products";
     for (let i in productsAddedToCart) {
 
         //Creating each product display
-        let articlesCart = document.createElement('article');
-        articlesCart.className = 'cart__products-details';
-        let idProductCart = document.createElement('p');
+        let articlesCart        = document.createElement('article');
+        let idProductCart       = document.createElement('p');
+        articlesCart.className  = 'cart__products-details';
         idProductCart.textContent = 'Ref. n° : ' + productsAddedToCart[i].id;
 
         //Possibility to go back on product page by clicking on its image
@@ -36,32 +33,33 @@ if (productsAddedToCart !== null) {
         linkProductsPageCart.href = '../pages/products.html?type=' + productsAddedToCart[i].param + '&id=' + productsAddedToCart[i].id;
 
         //Creating different elements to describe products
-        let imageProductsCart = document.createElement('img');
-        imageProductsCart.src = productsAddedToCart[i].imgUrl;
-        imageProductsCart.alt = "Photo " + productsAddedToCart[i].name;
+        let imageProductsCart   = document.createElement('img');
+        let divProductsCart     = document.createElement('div');
+        let titleProductsCart   = document.createElement('h3');
+        imageProductsCart.src   = productsAddedToCart[i].imgUrl;
+        imageProductsCart.alt   = "Photo " + productsAddedToCart[i].name;
         imageProductsCart.title = "Photo de " + productsAddedToCart[i].name;
         imageProductsCart.className = "cart__products-image";
-        let divProductsCart = document.createElement('div');
-        let titleProductsCart = document.createElement('h3');
-        titleProductsCart.textContent = productsAddedToCart[i].name;
+        divProductsCart.className = "cart__products-description";
         titleProductsCart.className = "cart__products-title";
+        titleProductsCart.textContent = productsAddedToCart[i].name;
 
         //Getting the price of each product and converting it in euro
-        let priceProductsCart = document.createElement('p');
-        let priceLengthCart = productsAddedToCart[i].price;
+        let priceProductsCart   = document.createElement('p');
+        let priceLengthCart     = productsAddedToCart[i].price;
         priceCalculation(priceLengthCart, priceProductsCart, 'Prix : ');
 
-        let divQuantity = document.createElement('div');
-        divQuantity.className = "cart__products-quantity";
         //Quantity chose on product's page
+        let divQuantity         = document.createElement('div');
         let quantityProductsCart = document.createElement('p');
+        let divButtonQuantity   = document.createElement('div');
+        divQuantity.className   = "cart__products-quantity";
         quantityProductsCart.textContent = "Quantité : " + productsAddedToCart[i].quantity;
-        let divButtonQuantity = document.createElement('div');
-        divButtonQuantity.id = "divButtonQuantity";
         
         //Creating a button to increase a product's quantity
-        let buttonMore = document.createElement('button');
-        buttonMore.textContent = "+";
+        let buttonMore          = document.createElement('button');
+        buttonMore.className = "cart__products-btn-quantity";
+        buttonMore.textContent  = "+";
         buttonMore.addEventListener('click', function (event) {
             //Increasing product's quantity, updating localStorage and reloading cart's page
             productsAddedToCart[i].quantity++;
@@ -70,8 +68,9 @@ if (productsAddedToCart !== null) {
         });
 
         //Creating button to reduce a product's quantity
-        let buttonLess = document.createElement('button');
-        buttonLess.textContent = "-";
+        let buttonLess          = document.createElement('button');
+        buttonLess.className = "cart__products-btn-quantity";
+        buttonLess.textContent  = "-";
         buttonLess.addEventListener('click', function (event) {
             if (productsAddedToCart[i].quantity === 1) { //if quantity left of the product equals one and we want to reduce it
                 //Popup for product deletion
@@ -113,7 +112,6 @@ if (productsAddedToCart !== null) {
                 location.reload();
             }
         });
-
         //Calculating total price by product depending on quantity chose
         let totalPriceByProducts = document.createElement('p');
         totalPriceByProducts.className = "cart__products-price";
@@ -176,53 +174,52 @@ function sending(url, order) {
     });
 };
 
-if (productsAddedToCart !== null) { //If there is product(s) added in localStorage
-    //Creating form
-    let divTitleForm = document.createElement('div');
-    divTitleForm.className = "cart__form";
-    let titleForm = document.createElement('h2');
-    titleForm.className = "cart__form-title";
-    titleForm.textContent = "Passez votre commande !";
-    let sectionForm = document.createElement('section');
-    sectionForm.className = "cart__form-section";
-    let divForm = document.createElement('div');
-    divForm.innerHTML = `
-                <form action="" id="form">\n
-                    <div class="cart__form-fields">\n
-                        <label for="lastName">Nom : </label>\n
-                            <input type="text" name="lastName" id="lastName" class="cart__form-fields--required" required placeholder="Nom *" pattern="^[A-Z]{1}[a-z\ ]+$" onkeyup="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">\n
+//If there is product(s) added in localStorage creating form
+if (productsAddedToCart !== null) { 
+    let sectionForm             = document.createElement('section');
+    let titleForm               = document.createElement('h2');
+    let divForm                 = document.createElement('form');
+    
+    divForm.className           = "cart__form";
+    divForm.id                  = "form"
+    titleForm.className         = "cart__form-title";
+    titleForm.textContent       = "Finalisez votre commande !";
+    sectionForm.className       = "cart__form-section";
+    
+    divForm.innerHTML           = 
+                    `<div class="cart__form-fields">\n
+                        <label for="lastName">Nom * : </label>\n
+                            <input type="text" name="lastName" id="lastName" class="cart__form-input" required placeholder="Nom" pattern="^[A-Z]{1}[a-z\ ]+$" onkeyup="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">\n
                     </div>\n
                     <div class="cart__form-fields">\n
-                        <label for="firstName">Prénom : </label>\n
-                            <input type="text" name="firstName" id="firstName" class="cart__form-fields--required" required placeholder="Prénom *" pattern="^[A-Z]{1}[A-Za-zÀ-ÿ\ -]+$" onkeyup="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">\n
+                        <label for="firstName">Prénom * : </label>\n
+                            <input type="text" name="firstName" id="firstName" class="cart__form-input" required placeholder="Prénom" pattern="^[A-Z]{1}[A-Za-zÀ-ÿ\ -]+$" onkeyup="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">\n
                     </div>\n
                     <div class="cart__form-fields">\n
-                        <label for="address">Adresse : </label>\n
-                            <input type="text" name="address" id="address" class="cart__form-fields--required" required placeholder="N° et nom de la rue/avenue *" pattern="^[0-9]{1,4}[ ,-][ A-Za-zÀ-ÿ0-9\-]+$" onkeyup="this.value = this.value.toLowerCase();">\n
+                        <label for="address">Adresse * : </label>\n
+                            <input type="text" name="address" id="address" class="cart__form-input" required placeholder="N° et nom de la rue/avenue" pattern="^[0-9]{1,4}[ ,-][ A-Za-zÀ-ÿ0-9\-]+$" onkeyup="this.value = this.value.toLowerCase();">\n
                     </div>\n
                     <div class="cart__form-fields">\n
-                        <label for="city">Ville : </label>\n
-                            <input type="text" name="city" id="city" class="cart__form-fields--required" required placeholder="Ville *" pattern="^[A-Z]{1}[a-zA-Z\- ]+$" onkeyup="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">\n
+                        <label for="city">Ville * : </label>\n
+                            <input type="text" name="city" id="city" class="cart__form-input" required placeholder="Ville" pattern="^[A-Z]{1}[a-zA-Z\- ]+$" onkeyup="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">\n
                     </div>\n
                     <div class="cart__form-fields">\n
-                    <label for="phone">Téléphone (facultatif) : </label>\n
-                        <input type="number" name="phone" id="phone" class="" placeholder="Téléphone" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$" onkeyup="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">\n
+                    <label for="phone">Téléphone <span>(facultatif)</span> : </label>\n
+                        <input type="" name="phone" id="phone" class="cart__form-input" placeholder="Téléphone" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$" onkeyup="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">\n
                     </div>\n
                     <div class="cart__form-fields">\n
-                        <label for="email">Email : </label>\n
-                            <input type="email" name="email" id="email" class="cart__form-fields--required" required placeholder="Email *" pattern='^[A-Za-z0-9](([_\\.\\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\\.\\-]?[a-zA-Z0-9]+)*)\\.([A-Za-z]{2,})+$' onkeyup="this.value = this.value.toLowerCase();">\n
+                        <label for="email">Email * : </label>\n
+                            <input type="email" name="email" id="email" class="cart__form-input" required placeholder="Email" pattern='^[A-Za-z0-9](([_\\.\\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\\.\\-]?[a-zA-Z0-9]+)*)\\.([A-Za-z]{2,})+$' onkeyup="this.value = this.value.toLowerCase();">\n
                      </div>\n
                      <div class="cart__form-fields">\n
-                        <input type="button" id='btn-submit' value="Validez votre commande">\n
+                        <button type="button" id='btn-submit' class="cart__form-btn">Validez votre commande</button>\n
                      </div>\n
                      <p class="cart__form-required">Les champs marqués d'un * sont obligatoires</p>\n
-                 </form>`;
+                     `;
 
     //Placing form in cart page
     document.querySelector('#cart').appendChild(sectionForm);
-    sectionForm.appendChild(divTitleForm);
-    divTitleForm.appendChild(imgPlaceOrder);
-    divTitleForm.appendChild(titleForm);
+    sectionForm.appendChild(titleForm);
     sectionForm.appendChild(divForm);
 
     //Adding an event listener on the submit button
@@ -256,9 +253,8 @@ if (productsAddedToCart !== null) { //If there is product(s) added in localStora
         let productsOrdered = [];
         //Checking the form validity
         if (!document.querySelector('#form').checkValidity()) {
-            //Form isn't valid: preventing the submit
+            //Form isn't valid: preventing the submit and show an error message
             event.preventDefault();
-            //Popup for invalid form
             myPopUp('error', 'Formulaire invalide','Merci de bien renseigner tous les champs du formulaire !', '2000');
         } else {
             //Form is valid: creating the user contact infos

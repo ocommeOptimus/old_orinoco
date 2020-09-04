@@ -12,26 +12,6 @@ function myPopUp(myIcon, myMessage, myText, myTimer) {
   })
 }
 
-function getData(url) {
-  fetch(url)
-    .then(
-      function(response) {
-        if (response.status !== 200) {
-          myPopUp('error', 'Erreur ' + response.status, 'Une erreur est survenue, merci de réessayer ultérieurement', '2000')
-          return;
-        }
-
-        // Examine the text in the response
-        response.json().then(function(data) {
-          console.log(data);
-        });
-      }
-    )
-    .catch(function(err) {
-      console.log('Fetch Error :-S', err);
-    });
-}
-
 //Get Product ID
 let queryStr = window.location.search;
 let urlStr = new URLSearchParams(queryStr);
@@ -60,4 +40,4 @@ function priceCalculation(price, priceText, text) {
   return euros;
 }
 
-export {myPopUp, getData, urlStr, cartProductsNumber, priceCalculation};
+export {myPopUp, urlStr, cartProductsNumber, priceCalculation};

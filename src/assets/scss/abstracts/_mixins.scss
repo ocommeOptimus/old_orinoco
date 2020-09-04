@@ -17,7 +17,7 @@
     @each $mod, $val in $map {
       @font-face {
         font-family: $mod;
-        src: url('../../fonts/#{$val}') format('truetype');
+        src: url('../fonts/#{$val}') format('truetype');
         font-weight: normal;
         font-style: normal;
         }

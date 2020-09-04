@@ -1,0 +1,101 @@
+.cart {
+    &__products {
+        margin: 0 auto 80px auto;
+        width: 85%;
+    }
+    &__products-details {
+        @include flex-space;
+        background-color: lighten($colour-bg-nav, 10);
+        border-radius: 15px;
+        box-shadow: 1px 1px 11px darken($colour-bg-nav, 15);
+        margin: 30px auto;
+        padding: 20px 0;
+    }
+    &__products-image {
+        max-width: 360px;
+        padding: 15px;
+        border-radius: 25px;
+    }
+    &__products-description {
+        line-height: 2em;
+        margin: 0 15px;
+        width: 80%;
+    }
+    &__products-quantity {
+        background-color: lighten($colour-secondary, 25);
+        border-radius: 3px;
+        color: $colour-txt;
+        padding: 10px;
+        margin-bottom: 15px;
+        width: max-content;
+    }
+    &__products-btn-quantity {
+        font-size: 40px;
+        margin: 10px;
+        background: transparent;
+    }
+    &__products-price {
+        text-align: right;
+        color: $colour-txt;
+        font-size: map-get($font-size, medium);
+    }
+    &__total {
+        color: darken($colour-primary, 20);
+        font-size: map-get($font-size, large);
+        text-align: center;
+    }
+    &__form-section {
+        background-color: lighten($colour-bg-nav, 5);
+        border-radius: 5px;
+        box-shadow: 1px 1px 11px darken($colour-bg-nav, 15);
+        margin: auto;
+        padding: 40px 15px;
+        width: 85%;
+    }
+    &__form {
+        display: flex;
+        flex-direction: column;
+        font-size: map-get($font-size, medium);
+        margin: auto;
+        width: 65%;
+    }
+    &__form-title {
+        color: $colour-txt;
+        font-size: map-get($font-size, xl);
+        margin: 30px auto;
+        text-align: center;
+    }
+    &__form-fields {
+        display: flex;
+        justify-content: space-between;
+        margin: 15px;
+        span {
+            font-size: 15px;
+            vertical-align: top;
+        }
+    }
+    &__form-input {
+        border-radius: 5px;
+        font-size: map-get($font-size, small);
+        width: 75%;
+    }
+    &__form-btn {
+        border-radius: 15px;
+        background-color: $colour-bg-nav;
+        margin: 30px auto;
+        padding: 15px;
+        font-size: map-get($font-size, medium);
+        transition: all 0.3s;
+        &:hover {
+            background-color: lighten($colour-secondary, 10);
+            color: $colour-white;
+            cursor: pointer;
+        }
+    }
+    &__form-required {
+        color: lighten($colour-txt, 5);
+        font-size: map-get($font-size, small);
+        font-style: italic;
+        text-align: right;
+    }
+}

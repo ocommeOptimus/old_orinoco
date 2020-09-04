@@ -162,7 +162,9 @@ fetch('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id")
                     cartFill[k].quantity = parseInt(cartFill[k].quantity) + parseInt(quantityChoose.value);
                     //Popup for modified quantity
                     myPopUp('success', 'Quantite modifiee !', 'Votre choix a bien ete pris en compte !', '2000');
-                    setTimeout(function(){location.reload();}, 2000);
+                    console.log(parseInt(cartFill[k].quantity));
+                    console.log(parseInt(quantityChoose.value));
+                    console.log(cartFill[k].quantity);
                 }
             }
             //If the product isn't already added, we add it

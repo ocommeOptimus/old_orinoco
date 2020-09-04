@@ -7,14 +7,13 @@
 }
 
 html {
-    // 10px div by def of 16px
     font-size: 62.5%;
 
 }
 
 body {
     box-sizing: border-box;
-    background-image: url(../../../img/triangle-mosaic.png);
+    background-image: url(../img/triangle-mosaic.png);
     margin-bottom: 145px;
     @media (max-width: 992px) {
         margin-bottom: 100px;
