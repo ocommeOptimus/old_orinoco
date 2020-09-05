@@ -1,4 +1,4 @@
-import {urlStr, priceCalculation, cartProductsNumber, myPopUp} from "./main";
+import {urlStr, priceCalculation, cartProductsNumber, getAllOptions, optionQuantity, myPopUp} from "./main";
 
 cartProductsNumber();
 
@@ -74,16 +74,7 @@ fetch('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id")
             break;
     }
 
-    //Getting all options
-    function getAllOptions(value) {
-        data[value].forEach((value, index) => {
-            let option = document.createElement('option');
-            let optionValue = document.createTextNode(value);
-            option.appendChild(optionValue);
-            selectProduct.appendChild(option);
-        });
-    }
-
+    
     //Calling of the option function with the switch value as parameter
     getAllOptions(firstProperty);
 
@@ -98,17 +89,6 @@ fetch('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id")
     selectQuantity.name         = "quantity";
     selectQuantity.id           = "quantityChoose";
 
-    //Creating possibility to choose quantity of each products
-    function optionQuantity() {
-        let j = 0;
-        while (j <= 8) {
-            j++;
-            let option = document.createElement('option');
-            option.textContent = j;
-            option.value = j;
-            selectQuantity.appendChild(option);
-        }
-    }
     //Creating the 'select' element by calling the optionQuantity function
     optionQuantity();
 
@@ -150,7 +130,7 @@ fetch('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id")
             
             //Popup for product added
             myPopUp('success', 'Felicitations', 'Produit ajouté au panier !', '2000');
-
+            setTimeout(function(){location.reload()}, 2000)
         } else {
             //Else, verifying if the product has already been added
             let cartFill = JSON.parse(localStorage.getItem('cart'));

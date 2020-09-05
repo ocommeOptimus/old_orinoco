@@ -1,4 +1,4 @@
-import {cartProductsNumber, myPopUp, priceCalculation} from "./main";
+import {cartProductsNumber, myPopUp, priceCalculation, sending} from "./main";
 import Swal from "sweetalert2";
 
 cartProductsNumber();
@@ -58,7 +58,7 @@ if (productsAddedToCart !== null) {
         
         //Creating a button to increase a product's quantity
         let buttonMore          = document.createElement('button');
-        buttonMore.className = "cart__products-btn-quantity";
+        buttonMore.className    = "cart__products-btn-quantity";
         buttonMore.textContent  = "+";
         buttonMore.addEventListener('click', function (event) {
             //Increasing product's quantity, updating localStorage and reloading cart's page
@@ -69,7 +69,7 @@ if (productsAddedToCart !== null) {
 
         //Creating button to reduce a product's quantity
         let buttonLess          = document.createElement('button');
-        buttonLess.className = "cart__products-btn-quantity";
+        buttonLess.className    = "cart__products-btn-quantity";
         buttonLess.textContent  = "-";
         buttonLess.addEventListener('click', function (event) {
             if (productsAddedToCart[i].quantity === 1) { //if quantity left of the product equals one and we want to reduce it
@@ -153,26 +153,8 @@ class OrderConfirm {
     }
 }
 
-//Promise for POST request
-function sending(url, order) {
-    return new Promise(function (resolve, reject) {
-        let request = new XMLHttpRequest();
-        request.onreadystatechange = function (response) {
-            if (this.readyState === 4) {
-                if (this.status === 201) {
-                    resolve(response = JSON.parse(this.responseText), orderIds.push(new OrderConfirm(response.orderId, JSON.parse(localStorage.getItem('paramOrder')))), localStorage.setItem('orderId', JSON.stringify(orderIds)), localStorage.setItem('contact', JSON.stringify(response.contact)));
-                } else {
-                    reject(
-                        myPopUp('error', 'Erreur' + this.satus, 'Une erreur est survenue, merci de réessayer ultérieurement', '2000'), setTimeout(function(){location.reload()}, 3000)
-                    );
-                }
-            }
-        };
-        request.open("POST", url);
-        request.setRequestHeader("Content-Type", "application/json");
-        request.send(JSON.stringify(order));
-    });
-};
+//Calling promise for POST request
+sending()
 
 //If there is product(s) added in localStorage creating form
 if (productsAddedToCart !== null) { 
@@ -227,26 +209,26 @@ if (productsAddedToCart !== null) {
         //Creating class for sending contact infos
         class Contact {
             constructor(firstName, lastName, address, city, email) {
-                this.firstName = firstName;
-                this.lastName = lastName;
-                this.address = address;
-                this.city = city;
-                this.email = email;
+                this.firstName  = firstName;
+                this.lastName   = lastName;
+                this.address    = address;
+                this.city       = city;
+                this.email      = email;
             }
         }
         //Creating a class to post contact's object and product's array to server
         class FormSent {
             constructor(user, products) {
-                this.contact = user;
-                this.products = products;
+                this.contact    = user;
+                this.products   = products;
             }
         }
         //Creating a class to easily add product purchased info
         class Confirm {
             constructor(param, id, quantity) {
-                this.param = param;
-                this.id = id;
-                this.quantity = quantity;
+                this.param      = param;
+                this.id         = id;
+                this.quantity   = quantity;
             }
         }
         //Initializing array for products Ordered
@@ -295,15 +277,15 @@ if (productsAddedToCart !== null) {
 }
 
 if (productsAddedToCart === null) { //If the cart is empty, creating a button to go back to homepage
-    sectionCart.id = "cart-empty";
-    let textEmptyCart = document.createElement('h2');
-    textEmptyCart.textContent = "Votre panier est vide !!";
-    textEmptyCart.className = "cart__empty-title";
+    let textEmptyCart                   = document.createElement('h2');
+    textEmptyCart.textContent           = "Votre panier est vide !!";
+    textEmptyCart.className             = "cart__empty-title";
+    sectionCart.id                      = "cart-empty";
 
     //Creating button to go back to Homepage
-    let buttonReturnHomepage = document.createElement('button');
-    buttonReturnHomepage.textContent = "Nos produits";
-    buttonReturnHomepage.className = "cart__home-btn"
+    let buttonReturnHomepage            = document.createElement('button');
+    buttonReturnHomepage.textContent    = "Nos produits";
+    buttonReturnHomepage.className      = "cart__home-btn"
     buttonReturnHomepage.addEventListener('click', function (event) {
         window.location.href = "../../index.html";
     });

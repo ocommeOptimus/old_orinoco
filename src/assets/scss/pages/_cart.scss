@@ -10,6 +10,9 @@
         box-shadow: 1px 1px 11px darken($colour-bg-nav, 15);
         margin: 30px auto;
         padding: 20px 0;
+        @media (max-width:992px) {
+            justify-content: center;
+        }
     }
     &__products-image {
         max-width: 360px;
@@ -20,6 +23,9 @@
         line-height: 2em;
         margin: 0 15px;
         width: 80%;
+        @media (max-width: 992px) {
+            margin: auto;
+        }
     }
     &__products-quantity {
         background-color: lighten($colour-secondary, 25);
@@ -38,11 +44,17 @@
         text-align: right;
         color: $colour-txt;
         font-size: map-get($font-size, medium);
+        @media (max-width: 992px) {
+            font-size: map-get($font-size, small);
+        }
     }
     &__total {
         color: darken($colour-primary, 20);
         font-size: map-get($font-size, large);
         text-align: center;
+        @media (max-width: 992px) {
+            font-size: map-get($font-size, small);
+        }
     }
     &__form-section {
         background-color: lighten($colour-bg-nav, 5);
@@ -57,7 +69,10 @@
         flex-direction: column;
         font-size: map-get($font-size, medium);
         margin: auto;
-        width: 65%;
+        @media (max-width: 992px) {
+            font-size: 2rem;
+            width: 90%;
+        }
     }
     &__form-title {
         color: $colour-txt;
@@ -78,6 +93,10 @@
         border-radius: 5px;
         font-size: map-get($font-size, small);
         width: 75%;
+        @media (max-width:992px) {
+            font-size: 1.5rem;
+            width: 55%;
+        }
     }
     &__form-btn {
         border-radius: 15px;
@@ -91,11 +110,17 @@
             color: $colour-white;
             cursor: pointer;
         }
+        @media (max-width:992px) {
+            font-size: 2rem;
+        }
     }
     &__form-required {
         color: lighten($colour-txt, 5);
         font-size: map-get($font-size, small);
         font-style: italic;
         text-align: right;
+        @media (max-width:992px) {
+            font-size: 1rem;
+        }
     }
 }

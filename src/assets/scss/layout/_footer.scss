@@ -4,12 +4,6 @@
     left: 0;
     background: $colour-primary;
     width: 100%;
-    @media (max-width: 992px) {
-        height: 115px;
-    }
-    @media (max-width: 576px) {
-        height: 90px;
-    }
     &__info {
         width: auto;
         height: 100%;
@@ -38,10 +32,7 @@
             animation: footer-shake $anim-dur infinite ease-in-out alternate;
         }
         @media (max-width:992px){
-            font-size: map-get($font-size, small);
-        }
-        @media (max-width:576px){
-            font-size: map-get($font-size, small);
+            font-size: 1.5rem;
         }
     }
     &__link-text {
