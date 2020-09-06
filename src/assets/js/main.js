@@ -140,7 +140,7 @@ function getAllOptions(value) {
 }
 
   //Creating possibility to choose quantity of each products
-  function optionQuantity() {
+function optionQuantity() {
     let j = 0;
     while (j <= 8) {
         j++;
@@ -159,6 +159,28 @@ function priceCalculation(price, priceText, text) {
 }
 
 //Promise for POST request
+function getItemsInfo() {
+  function sending(url, order) {
+    return new Promise(function (resolve, reject) {
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function (response) {
+            if (this.readyState === 4) {
+                if (this.status === 201) {
+                    resolve(response = JSON.parse(this.responseText), orderIds.push(new OrderConfirm(response.orderId, JSON.parse(localStorage.getItem('paramOrder')))), localStorage.setItem('orderId', JSON.stringify(orderIds)), localStorage.setItem('contact', JSON.stringify(response.contact)));
+                } else {
+                    reject(
+                        myPopUp('error', 'Erreur' + this.satus, 'Une erreur est survenue, merci de réessayer ultérieurement', '2000'), setTimeout(function(){location.reload()}, 3000)
+                    );
+                }
+            }
+        };
+        request.open("POST", url);
+        request.setRequestHeader("Content-Type", "application/json");
+        request.send(JSON.stringify(order));
+    });
+  };
+}
+
 function sending(url, order) {
   return new Promise(function (resolve, reject) {
       let request = new XMLHttpRequest();
@@ -179,5 +201,4 @@ function sending(url, order) {
   });
 };
 
-
-export {myPopUp, urlStr, cartProductsNumber, fetchProducts, getAllOptions, optionQuantity, priceCalculation, sending};
+export {myPopUp, urlStr, cartProductsNumber, fetchProducts, getAllOptions, optionQuantity, priceCalculation, getItemsInfo, sending};

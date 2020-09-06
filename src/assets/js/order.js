@@ -1,4 +1,5 @@
 import {priceCalculation} from "./main";
+import Swal from "sweetalert2";
 
 Swal.fire({
         icon: 'success',

@@ -1,4 +1,4 @@
-import {cartProductsNumber, myPopUp, priceCalculation, sending} from "./main";
+import {cartProductsNumber, myPopUp, priceCalculation} from "./main";
 import Swal from "sweetalert2";
 
 cartProductsNumber();
@@ -143,7 +143,7 @@ if (productsAddedToCart !== null) {
     totalOrder.className = "cart__total";
     priceCalculation(calculationTotalOrder, totalOrder, 'Prix total de la commande : ');
     sectionCart.appendChild(totalOrder);
-}
+};
 
 let orderIds = [];
 class OrderConfirm {
@@ -154,7 +154,25 @@ class OrderConfirm {
 }
 
 //Calling promise for POST request
-sending()
+function sending(url, order) {
+    return new Promise(function (resolve, reject) {
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function (response) {
+            if (this.readyState === 4) {
+                if (this.status === 201) {
+                    resolve(response = JSON.parse(this.responseText), orderIds.push(new OrderConfirm(response.orderId, JSON.parse(localStorage.getItem('paramOrder')))), localStorage.setItem('orderId', JSON.stringify(orderIds)), localStorage.setItem('contact', JSON.stringify(response.contact)));
+                } else {
+                    reject(
+                        myPopUp('error', 'Erreur' + this.satus, 'Une erreur est survenue, merci de réessayer ultérieurement', '2000'), setTimeout(function(){location.reload()}, 3000)
+                    );
+                }
+            }
+        };
+        request.open("POST", url);
+        request.setRequestHeader("Content-Type", "application/json");
+        request.send(JSON.stringify(order));
+    });
+};
 
 //If there is product(s) added in localStorage creating form
 if (productsAddedToCart !== null) { 

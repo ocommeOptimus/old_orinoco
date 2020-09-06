@@ -76,6 +76,15 @@ fetch('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id")
 
     
     //Calling of the option function with the switch value as parameter
+    function getAllOptions(value) {
+        data[value].forEach((value, index) => {
+            let option = document.createElement('option');
+            let optionValue = document.createTextNode(value);
+            option.appendChild(optionValue);
+            selectProduct.appendChild(option);
+        });
+    }
+    
     getAllOptions(firstProperty);
 
     //Possibility to choose quantity
@@ -90,6 +99,17 @@ fetch('http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id")
     selectQuantity.id           = "quantityChoose";
 
     //Creating the 'select' element by calling the optionQuantity function
+    function optionQuantity() {
+        let j = 0;
+        while (j <= 8) {
+            j++;
+            let option = document.createElement('option');
+            option.textContent = j;
+            option.value = j;
+            selectQuantity.appendChild(option);
+        }
+    }
+
     optionQuantity();
 
     let priceProduct = document.createElement('p');

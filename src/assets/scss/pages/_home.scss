@@ -2,11 +2,17 @@
     margin: auto;
     padding: 100px 0px;
     width: 50%;
+    @media (max-width:992px) {
+        width: 80%;
+    }
     &__title {
         text-align: center;
         font-size: 6.5rem;
         color: $colour-txt;
         margin: 20px;
+        @media (max-width: 992px) {
+            font-size: map-get($font-size, medium);
+        }
     }
     &__text {
         font-family: 'milkman', sans-serif;
@@ -15,5 +21,8 @@
         color: lighten($colour-txt, 15);
         line-height: 1;
         padding-top: 50px;
+        @media (max-width: 992px) {
+            font-size: 2rem;
+        }
     }
 }
